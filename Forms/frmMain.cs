@@ -23,8 +23,6 @@ namespace WifiAutoConnector
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            ConnectionManager.WifiInstance = new Wifi();
-
             //Simple one liner Enable/Disable btnConnect
             ConnectionManager.WifiInstance.ConnectionStatusChanged += (s, ea) =>
             {
@@ -70,10 +68,7 @@ namespace WifiAutoConnector
 
         private void networkStatusToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var ap = (AccessPoint)WifiList.SelectedItem;
-
-            frmNetowkrStatus v = new frmNetowkrStatus(ap);
-            v.ShowDialog();
+            new frmNetowkrStatus(SelectedAccessPoint).ShowDialog();
         }
     }
 }
