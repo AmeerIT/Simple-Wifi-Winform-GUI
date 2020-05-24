@@ -1,2 +1,6 @@
 # Simple-Wifi-Winform-GUI
-DigiExam / simplewifi winform GUI
+based on DigiExam / simplewifi winform GUI
+
+link 
+https://github.com/DigiExam/simplewifi
+
