@@ -5,16 +5,9 @@ namespace WifiAutoConnector.Classes
     public static class ConnectionManager
     {
         public static Wifi WifiInstance = new Wifi();
-        public static void Connect(AccessPoint accessPoint)
+        public static void Connect(AccessPoint accessPoint, AuthRequest authRequest)
         {
-            //Bad example
-            var t = new frmGetPassword().ShowDialog();
-            if (frmGetPassword.Canceled)
-                return;
-
-            var AuthRequest = new AuthRequest(accessPoint);
-            AuthRequest.Password = frmGetPassword.Password;
-            accessPoint.ConnectAsync(AuthRequest);
+            accessPoint.ConnectAsync(authRequest);
         }
     }
 }

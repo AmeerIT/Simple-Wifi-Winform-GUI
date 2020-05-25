@@ -7,7 +7,7 @@ namespace WifiAutoConnector
 {
     public partial class frmNetowkrStatus : Form
     {
-        private readonly AuthRequest AuthRequest;
+        private AuthRequest AuthRequest;
         private readonly AccessPoint AccessPoint;
 
         public frmNetowkrStatus(AccessPoint accessPoint)
@@ -58,9 +58,13 @@ namespace WifiAutoConnector
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            ConnectionManager.Connect(AccessPoint);
-            if (AccessPoint.IsConnected)
-                connected.Text = AccessPoint.IsConnected ? Messages.Connected : Messages.Disconnected;
+            //Bad example
+            new frmGetPassword(AccessPoint).ShowDialog();
+            if (frmGetPassword.Canceled)
+                return;
+
+            AuthRequest = frmGetPassword.AuthRequest;
+            ConnectionManager.Connect(AccessPoint, AuthRequest);
         }
     }
 }

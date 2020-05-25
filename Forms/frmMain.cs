@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimpleWifi;
@@ -14,7 +9,6 @@ namespace WifiAutoConnector
 {
     public partial class frmMain : Form
     {
-        private const string idleStatus = "Idle";
         private AccessPoint SelectedAccessPoint;
         public frmMain()
         {
@@ -58,7 +52,13 @@ namespace WifiAutoConnector
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            ConnectionManager.Connect((AccessPoint)WifiList.SelectedItem);
+            //Bad example
+            new frmGetPassword(SelectedAccessPoint).ShowDialog();
+            if (frmGetPassword.Canceled)
+                return;
+
+            var authReq = frmGetPassword.AuthRequest;
+            ConnectionManager.Connect(SelectedAccessPoint, authReq);
         }
 
         private void WifiList_SelectedIndexChanged(object sender, EventArgs e)
